@@ -124,7 +124,7 @@
       padding: 20px;
       background: #fff;
       border-radius: 8px;
-      max-width: 300px;
+      width: 300px;
       text-align: center;
       min-height: 80px;
       display: flex;
@@ -181,6 +181,12 @@
     .page-break {
       height: 10px;
     }
+    .symbol {
+  font-size: 1.8em;
+  opacity: 0.7;
+  transition: all 0.3s;
+  color: #ff4b5c;
+}
   </style>
 </head>
 <body>
@@ -194,16 +200,16 @@
 
       <!-- Inner layer -->
       <div class="inner-layer" id="innerLayer">
-        <div class="inner-flap" id="innerFlap0" onclick="showMessage(0)"><div class="symbol">♡</div></div>
-        <div class="inner-flap" id="innerFlap1" onclick="showMessage(1)"><div class="symbol">♡</div></div>
-        <div class="inner-flap" id="innerFlap2" onclick="showMessage(2)"><div class="symbol">♡</div></div>
-        <div class="inner-flap" id="innerFlap3" onclick="showMessage(3)"><div class="symbol">♡</div></div>
+        <div class="inner-flap" id="innerFlap0" onclick="showMessage(0)"><div class="symbol">♥︎</div></div>
+        <div class="inner-flap" id="innerFlap1" onclick="showMessage(1)"><div class="symbol">♥︎</div></div>
+        <div class="inner-flap" id="innerFlap2" onclick="showMessage(2)"><div class="symbol">♥︎</div></div>
+        <div class="inner-flap" id="innerFlap3" onclick="showMessage(3)"><div class="symbol">♥︎</div></div>
       </div>
     </div>
   </div>
 
   <div class="message-box" id="messageBox">
-    <div>click any of the triangles, or click any of the symbols!</div>
+    <div>click any of the triangles to move it around!</div>
   </div>
 
   <button class="reset-btn" onclick="resetSes()">start over</button>
@@ -224,14 +230,12 @@
       "aku lg mikirin km",
       "duh pngn beol",
       "kapan kelarnya ya",
-      "udhhh",
-      "pengen pulang dh"
     ];
 
     function openMe(flapNumber) {
       const eunseok = document.getElementById('eunseok');
       const innerLayer = document.getElementById('innerLayer');
-      document.getElementById('messageBox').innerHTML = '<div>choose one of the hearts to reveal something?</div>';
+      document.getElementById('messageBox').innerHTML = '<div>choose one of the hearts!</div>';
 
       switch(flapNumber) {
         case 0:
