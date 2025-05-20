@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fortune Teller</title>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #f5f5f5;
+            font-family: 'Figtree', sans-serif;
+            margin: 0;
+            flex-direction: column;
+            padding-bottom: 40px;
+        }
+        
+        .fortune-teller-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 20px auto;
+            perspective: 1000px;
+        }
+        
+        .fortune-teller {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+            transform-origin: center center;
+        }
+        
+        .outer-flap {
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            background: #ff9e7d;
+            box-sizing: border-box;
+            cursor: pointer;
+            transition: transform 0.3s;
+            transform-origin: 0% 0%;
+            z-index: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .outer-flap:nth-child(1) {
+            top: 0;
+            left: 0;
+            clip-path: polygon(0 0, 100% 0, 0 100%);
+            background: #FFB347;
+        }
+        
+        .outer-flap:nth-child(2) {
+            top: 0;
+            right: 0;
+            clip-path: polygon(100% 0, 0 0, 100% 100%);
+            background: #FF6961;
+        }
+        
+        .outer-flap:nth-child(3) {
+            bottom: 0;
+            left: 0;
+            clip-path: polygon(0 100%, 0 0, 100% 100%);
+            background: #77DD77;
+        }
+        
+        .outer-flap:nth-child(4) {
+            bottom: 0;
+            right: 0;
+            clip-path: polygon(100% 100%, 0 100%, 100% 0);
+            background: #AEC6CF;
+        }
+        
+        .outer-flap:hover {
+            filter: brightness(1.1);
+        }
+        
+        .inner-layer {
+            position: absolute;
+            width: 60%;
+            height: 60%;
+            top: 20%;
+            left: 20%;
+            background: #fffacd;
+            display: flex;
+            flex-wrap: wrap;
+            z-index: 1;
+            transition: transform 0.5s;
+            transform-style: preserve-3d;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 5px;
+        }
+        
+        .inner-flap {
+            width: 50%;
+            height: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .inner-flap .symbol {
+            font-size: 1.8em;
+            opacity: 0.7;
+            transition: all 0.3s;
+        }
+        
+        .inner-flap:hover .symbol {
+            transform: scale(1.2);
+            opacity: 1;
+        }
+        
+        .inner-flap:nth-child(1) {
+            transform: rotate(0deg);
+        }
+        
+        .inner-flap:nth-child(2) {
+            transform: rotate(90deg);
+        }
+        
+        .inner-flap:nth-child(3) {
+            transform: rotate(180deg);
+        }
+        
+        .inner-flap:nth-child(4) {
+            transform: rotate(270deg);
+        }
+        
+        .message-box {
+            margin-top: 30px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            max-width: 300px;
+            text-align: center;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .reset-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'Figtree', sans-serif;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .reset-btn:hover {
+            background: #ff5252;
+            transform: translateY(-2px);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .signature {
+            margin-top: 40px;
+            font-size: 12px;
+            color: #888;
+            text-align: center;
+            line-height: 1.6;
+        }
+        
+        .signature span {
+            text-decoration: underline;
+        }
+        
+        .signature i {
+            font-style: italic;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+        
+        .page-break {
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="fortune-teller-container">
+        <div class="fortune-teller" id="fortuneTeller">
+            <!-- Outer flaps -->
+            <div class="outer-flap" onclick="openFortuneTeller(0)"></div>
+            <div class="outer-flap" onclick="openFortuneTeller(1)"></div>
+            <div class="outer-flap" onclick="openFortuneTeller(2)"></div>
+            <div class="outer-flap" onclick="openFortuneTeller(3)"></div>
+            
+            <!-- Inner layer -->
+            <div class="inner-layer" id="innerLayer">
+                <div class="inner-flap" onclick="showMessage(0)"><div class="symbol">✧</div></div>
+                <div class="inner-flap" onclick="showMessage(1)"><div class="symbol">✦</div></div>
+                <div class="inner-flap" onclick="showMessage(2)"><div class="symbol">✿</div></div>
+                <div class="inner-flap" onclick="showMessage(3)"><div class="symbol">❂</div></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="message-box" id="messageBox">
+        <div>Click any colored flap to open, then choose a symbol</div>
+    </div>
+    
+    <button class="reset-btn" onclick="resetFortuneTeller()">Reset</button>
+    
+    <div class="page-break"></div>
+    
+    <div class="signature">
+        made by <span>jungsungcahn</span> for <i>eunsheoksong</i>
+    </div>
+    
+    <script>
+        const messages = [
+            "A wonderful surprise is coming your way soon",
+            "Your creativity will shine brightly today",
+            "Someone is thinking of you right now",
+            "Good news will arrive when you least expect it",
+            "Adventure awaits around the next corner",
+            "Your kindness will be returned to you",
+            "A long-held wish is about to come true",
+            "Unexpected joy is coming your way"
+        ];
+        
+        function openFortuneTeller(flapNumber) {
+            const fortuneTeller = document.getElementById('fortuneTeller');
+            const innerLayer = document.getElementById('innerLayer');
+            
+            // Reset message box
+            document.getElementById('messageBox').innerHTML = '<div>Choose a symbol to reveal your message</div>';
+            
+            // Open the fortune teller
+            switch(flapNumber) {
+                case 0: // Top-left
+                    fortuneTeller.style.transform = 'rotateZ(-10deg)';
+                    innerLayer.style.transform = 'rotateZ(45deg)';
+                    break;
+                case 1: // Top-right
+                    fortuneTeller.style.transform = 'rotateZ(10deg)';
+                    innerLayer.style.transform = 'rotateZ(-45deg)';
+                    break;
+                case 2: // Bottom-left
+                    fortuneTeller.style.transform = 'rotateZ(10deg) rotateX(10deg)';
+                    innerLayer.style.transform = 'rotateZ(45deg)';
+                    break;
+                case 3: // Bottom-right
+                    fortuneTeller.style.transform = 'rotateZ(-10deg) rotateX(10deg)';
+                    innerLayer.style.transform = 'rotateZ(-45deg)';
+                    break;
+            }
+        }
+        
+        function showMessage(flapNumber) {
+            const messageBox = document.getElementById('messageBox');
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            
+            messageBox.innerHTML = `<div class="fade-in">${randomMessage}</div>`;
+        }
+        
+        function resetFortuneTeller() {
+            const fortuneTeller = document.getElementById('fortuneTeller');
+            const innerLayer = document.getElementById('innerLayer');
+            
+            fortuneTeller.style.transform = 'rotateZ(0deg)';
+            innerLayer.style.transform = 'rotateZ(0deg)';
+            
+            document.getElementById('messageBox').innerHTML = '<div>Click any colored flap to open, then choose a symbol</div>';
+        }
+    </script>
+</body>
+</html>
