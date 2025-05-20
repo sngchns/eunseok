@@ -1,293 +1,283 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>1-4-3</title>
-    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: #f7f7f7;
-            font-family: 'Figtree', sans-serif;
-            margin: 0;
-            flex-direction: column;
-            padding-bottom: 40px;
-        }
-        
-        .ses-container {
-            position: relative;
-            width: 300px;
-            height: 300px;
-            margin: 20px auto;
-            perspective: 1000px;
-        }
-        
-        .ses {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.5s;
-            transform-origin: center center;
-        }
-        
-        .outer-flap {
-            position: absolute;
-            width: 50%;
-            height: 50%;
-            background: #ff9e7d;
-            box-sizing: border-box;
-            cursor: pointer;
-            transition: transform 0.3s;
-            transform-origin: 0% 0%;
-            z-index: 2;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .outer-flap:nth-child(1) {
-            top: 0;
-            left: 0;
-            clip-path: polygon(0 0, 100% 0, 0 100%);
-            background: #670011;
-        }
-        
-        .outer-flap:nth-child(2) {
-            top: 0;
-            right: 0;
-            clip-path: polygon(100% 0, 0 0, 100% 100%);
-            background: #960019;
-        }
-        
-        .outer-flap:nth-child(3) {
-            bottom: 0;
-            left: 0;
-            clip-path: polygon(0 100%, 0 0, 100% 100%);
-            background: #cb4c46;
-        }
-        
-        .outer-flap:nth-child(4) {
-            bottom: 0;
-            right: 0;
-            clip-path: polygon(100% 100%, 0 100%, 100% 0);
-            background: #fe8477;
-        }
-        
-        .outer-flap:hover {
-            filter: brightness(1.1);
-        }
-        
-        .inner-layer {
-            position: absolute;
-            width: 60%;
-            height: 60%;
-            top: 20%;
-            left: 20%;
-            background: #fed8d8;
-            display: flex;
-            flex-wrap: wrap;
-            z-index: 1;
-            transition: transform 0.5s;
-            transform-style: preserve-3d;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
-            border-radius: 5px;
-        }
-        
-        .inner-flap {
-            width: 50%;
-            height: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            position: relative;
-        }
-        
-        .inner-flap .symbol {
-            font-size: 1.8em;
-            opacity: 0.7;
-            transition: all 0.3s;
-        }
-        
-        .inner-flap:hover .symbol {
-            transform: scale(1.2);
-            opacity: 1;
-        }
-        
-        .inner-flap:nth-child(1) {
-            transform: rotate(0deg);
-        }
-        
-        .inner-flap:nth-child(2) {
-            transform: rotate(90deg);
-        }
-        
-        .inner-flap:nth-child(3) {
-            transform: rotate(180deg);
-        }
-        
-        .inner-flap:nth-child(4) {
-            transform: rotate(270deg);
-        }
-        
-        .message-box {
-            margin-top: 30px;
-            padding: 20px;
-            background: #fff;
-            border-radius: 8px;
-            max-width: 300px;
-            text-align: center;
-            min-height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        
-        .reset-btn {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background: #3c0000;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-family: 'Figtree', sans-serif;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-        
-        .reset-btn:hover {
-            background: #2b0000;
-            transform: translateY(-2px);
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.5s ease-out;
-        }
-        
-        .signature {
-            margin-top: 40px;
-            font-size: 12px;
-            color: #888;
-            text-align: center;
-            line-height: 1.2;
-        }
-        
-        .signature span {
-            text-decoration: underline;
-        }
-        
-        .signature i {
-            font-style: italic;
-            text-decoration: underline;
-            font-weight: bold;
-        }
-        
-        .page-break {
-            height: 20px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>1-4-3</title>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #f7f7f7;
+      font-family: 'Figtree', sans-serif;
+      margin: 0;
+      flex-direction: column;
+      padding-bottom: 40px;
+    }
+
+    .ses-container {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      margin: 20px auto;
+      perspective: 1000px;
+    }
+
+    .ses {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.5s ease-in-out;
+      transform-origin: center center;
+    }
+
+    .outer-flap {
+      position: absolute;
+      width: 50%;
+      height: 50%;
+      box-sizing: border-box;
+      cursor: pointer;
+      transition: transform 0.3s, filter 0.3s;
+      transform-origin: 0% 0%;
+      z-index: 2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .outer-flap:nth-child(1) {
+      top: 0;
+      left: 0;
+      clip-path: polygon(0 0, 100% 0, 0 100%);
+      background: #670011;
+    }
+
+    .outer-flap:nth-child(2) {
+      top: 0;
+      right: 0;
+      clip-path: polygon(100% 0, 0 0, 100% 100%);
+      background: #960019;
+    }
+
+    .outer-flap:nth-child(3) {
+      bottom: 0;
+      left: 0;
+      clip-path: polygon(0 100%, 0 0, 100% 100%);
+      background: #cb4c46;
+    }
+
+    .outer-flap:nth-child(4) {
+      bottom: 0;
+      right: 0;
+      clip-path: polygon(100% 100%, 0 100%, 100% 0);
+      background: #fe8477;
+    }
+
+    .outer-flap:hover {
+      filter: brightness(1.1);
+    }
+
+    .inner-layer {
+      position: absolute;
+      width: 60%;
+      height: 60%;
+      top: 20%;
+      left: 20%;
+      background: #fed8d8;
+      display: flex;
+      flex-wrap: wrap;
+      z-index: 1;
+      transition: transform 0.5s ease-in-out;
+      transform-style: preserve-3d;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 5px;
+    }
+
+    .inner-flap {
+      width: 50%;
+      height: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .inner-flap .symbol {
+      font-size: 1.8em;
+      opacity: 0.7;
+      transition: all 0.3s;
+    }
+
+    .inner-flap:hover .symbol {
+      transform: scale(1.2);
+      opacity: 1;
+    }
+
+    .message-box {
+      margin-top: 30px;
+      padding: 20px;
+      background: #fff;
+      border-radius: 8px;
+      max-width: 300px;
+      text-align: center;
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .reset-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #3c0000;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: 'Figtree', sans-serif;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .reset-btn:hover {
+      background: #2b0000;
+      transform: translateY(-2px);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    .signature {
+      margin-top: 40px;
+      font-size: 12px;
+      color: #888;
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    .signature span {
+      text-decoration: underline;
+    }
+
+    .signature i {
+      font-style: italic;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+
+    .page-break {
+      height: 10px;
+    }
+  </style>
 </head>
 <body>
-    <div class="ses-container">
-        <div class="ses" id="eunseok">
-            <!-- Outer flaps -->
-            <div class="outer-flap" onclick="openMe(0)"></div>
-            <div class="outer-flap" onclick="openMe(1)"></div>
-            <div class="outer-flap" onclick="openMe(2)"></div>
-            <div class="outer-flap" onclick="openMe(3)"></div>
-            
-            <!-- Inner layer -->
-            <div class="inner-layer" id="innerLayer">
-                <div class="inner-flap" onclick="showMessage(0)"><div class="symbol">♡</div></div>
-                <div class="inner-flap" onclick="showMessage(1)"><div class="symbol">♡</div></div>
-                <div class="inner-flap" onclick="showMessage(2)"><div class="symbol">♡</div></div>
-                <div class="inner-flap" onclick="showMessage(3)"><div class="symbol">♡</div></div>
-            </div>
-        </div>
+  <div class="ses-container">
+    <div class="ses" id="eunseok">
+      <!-- Outer flaps -->
+      <div class="outer-flap" onclick="openMe(0)"></div>
+      <div class="outer-flap" onclick="openMe(1)"></div>
+      <div class="outer-flap" onclick="openMe(2)"></div>
+      <div class="outer-flap" onclick="openMe(3)"></div>
+
+      <!-- Inner layer -->
+      <div class="inner-layer" id="innerLayer">
+        <div class="inner-flap" id="innerFlap0" onclick="showMessage(0)"><div class="symbol">♡</div></div>
+        <div class="inner-flap" id="innerFlap1" onclick="showMessage(1)"><div class="symbol">♡</div></div>
+        <div class="inner-flap" id="innerFlap2" onclick="showMessage(2)"><div class="symbol">♡</div></div>
+        <div class="inner-flap" id="innerFlap3" onclick="showMessage(3)"><div class="symbol">♡</div></div>
+      </div>
     </div>
-    
-    <div class="message-box" id="messageBox">
-        <div>click any of the triangles, or click any of the symbols!</div>
-    </div>
-    
-    <button class="reset-btn" onclick="resetSes()">start over</button>
-    
-    <div class="page-break"></div>
-    
-    <div class="signature">
-        made by <span>jungsungcahn</span> for <i>eunsheoksong</i>
-    </div>
-    
-    <script>
-        const messages = [
-            "jadi pacarku",
-            "masuk barak",
-            "jadi pacarkuuu.. kumohonn..",
-            "temenan sama dujuhn aja",
-            "lg apa",
-            "aku lg mikirin km",
-            "duh pngn beol",
-            "kapan kelarnya ya",
-            "udhhh",
-            "pengen pulang dh"
-        ];
-        
-        function openMe(flapNumber) {
-            const eunseok = document.getElementById('eunseok');
-            const innerLayer = document.getElementById('innerLayer');
-            
-            // 
-            document.getElementById('messageBox').innerHTML = '<div>choose one of the hearts to reveal something?</div>';
-            
-            // 
-            switch(flapNumber) {
-                case 0: // top-left
-                    eunseok.style.transform = 'rotateZ(-10deg)';
-                    innerLayer.style.transform = 'rotateZ(45deg)';
-                    break;
-                case 1: // top-right
-                    eunseok.style.transform = 'rotateZ(10deg)';
-                    innerLayer.style.transform = 'rotateZ(-45deg)';
-                    break;
-                case 2: // bottom-left
-                    eunseok.style.transform = 'rotateZ(10deg) rotateX(10deg)';
-                    innerLayer.style.transform = 'rotateZ(45deg)';
-                    break;
-                case 3: // bottom-right
-                    eunseok.style.transform = 'rotateZ(-10deg) rotateX(10deg)';
-                    innerLayer.style.transform = 'rotateZ(-45deg)';
-                    break;
-            }
-        }
-        
-        function showMessage(flapNumber) {
-            const messageBox = document.getElementById('messageBox');
-            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-            
-            messageBox.innerHTML = `<div class="fade-in">${randomMessage}</div>`;
-        }
-        
-        function resetses() {
-            const eunseok = document.getElementById('eunseok');
-            const innerLayer = document.getElementById('innerLayer');
-            
-            eunseok.style.transform = 'rotateZ(0deg)';
-            innerLayer.style.transform = 'rotateZ(0deg)';
-            
-            document.getElementById('messageBox').innerHTML = '<div>click any of the hearts!</div>';
-        }
-    </script>
+  </div>
+
+  <div class="message-box" id="messageBox">
+    <div>click any of the triangles, or click any of the symbols!</div>
+  </div>
+
+  <button class="reset-btn" onclick="resetSes()">start over</button>
+
+  <div class="page-break"></div>
+
+  <div class="signature">
+    made by <span>jungsungcahn</span> for <i>eunsheoksong</i>
+  </div>
+
+  <script>
+    const messages = [
+      "jadi pacarku",
+      "masuk barak",
+      "jadi pacarkuuu.. kumohonn..",
+      "temenan sama dujuhn aja",
+      "lg apa",
+      "aku lg mikirin km",
+      "duh pngn beol",
+      "kapan kelarnya ya",
+      "udhhh",
+      "pengen pulang dh"
+    ];
+
+    function openMe(flapNumber) {
+      const eunseok = document.getElementById('eunseok');
+      const innerLayer = document.getElementById('innerLayer');
+      document.getElementById('messageBox').innerHTML = '<div>choose one of the hearts to reveal something?</div>';
+
+      switch(flapNumber) {
+        case 0:
+          eunseok.style.transform = 'rotateZ(-10deg)';
+          innerLayer.style.transform = 'rotateZ(45deg)';
+          break;
+        case 1:
+          eunseok.style.transform = 'rotateZ(10deg)';
+          innerLayer.style.transform = 'rotateZ(-45deg)';
+          break;
+        case 2:
+          eunseok.style.transform = 'rotateZ(10deg) rotateX(10deg)';
+          innerLayer.style.transform = 'rotateZ(45deg)';
+          break;
+        case 3:
+          eunseok.style.transform = 'rotateZ(-10deg) rotateX(10deg)';
+          innerLayer.style.transform = 'rotateZ(-45deg)';
+          break;
+      }
+    }
+
+    function showMessage(flapNumber) {
+      const messageBox = document.getElementById('messageBox');
+      const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+      messageBox.innerHTML = `<div class="fade-in">${randomMessage}</div>`;
+    }
+
+    function resetSes() {
+      const eunseok = document.getElementById('eunseok');
+      const innerLayer = document.getElementById('innerLayer');
+      const messageBox = document.getElementById('messageBox');
+
+      // Smooth transform reset
+      eunseok.style.transform = 'rotateZ(0deg)';
+      innerLayer.style.transform = 'rotateZ(0deg)';
+
+      // Reset heart rotation smoothly
+      for (let i = 0; i < 4; i++) {
+        const flap = document.getElementById(`innerFlap${i}`);
+        flap.style.transform = 'rotate(0deg)';
+      }
+
+      setTimeout(() => {
+        messageBox.innerHTML = '<div class="fade-in">click any of the triangles, or click any of the symbols!</div>';
+      }, 500);
+    }
+  </script>
 </body>
 </html>
