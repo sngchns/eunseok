@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fortune Teller</title>
+    <title>1-4-3</title>
     <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body {
@@ -11,14 +11,14 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background: #f5f5f5;
+            background: #f7f7f7;
             font-family: 'Figtree', sans-serif;
             margin: 0;
             flex-direction: column;
             padding-bottom: 40px;
         }
         
-        .fortune-teller-container {
+        .ses-container {
             position: relative;
             width: 300px;
             height: 300px;
@@ -26,7 +26,7 @@
             perspective: 1000px;
         }
         
-        .fortune-teller {
+        .ses {
             width: 100%;
             height: 100%;
             position: relative;
@@ -54,28 +54,28 @@
             top: 0;
             left: 0;
             clip-path: polygon(0 0, 100% 0, 0 100%);
-            background: #FFB347;
+            background: #670011;
         }
         
         .outer-flap:nth-child(2) {
             top: 0;
             right: 0;
             clip-path: polygon(100% 0, 0 0, 100% 100%);
-            background: #FF6961;
+            background: #960019;
         }
         
         .outer-flap:nth-child(3) {
             bottom: 0;
             left: 0;
             clip-path: polygon(0 100%, 0 0, 100% 100%);
-            background: #77DD77;
+            background: #cb4c46;
         }
         
         .outer-flap:nth-child(4) {
             bottom: 0;
             right: 0;
             clip-path: polygon(100% 100%, 0 100%, 100% 0);
-            background: #AEC6CF;
+            background: #fe8477;
         }
         
         .outer-flap:hover {
@@ -88,7 +88,7 @@
             height: 60%;
             top: 20%;
             left: 20%;
-            background: #fffacd;
+            background: #fed8d8;
             display: flex;
             flex-wrap: wrap;
             z-index: 1;
@@ -152,7 +152,7 @@
         .reset-btn {
             margin-top: 20px;
             padding: 10px 20px;
-            background: #ff6b6b;
+            background: #3c0000;
             color: white;
             border: none;
             border-radius: 6px;
@@ -163,7 +163,7 @@
         }
         
         .reset-btn:hover {
-            background: #ff5252;
+            background: #2b0000;
             transform: translateY(-2px);
         }
         
@@ -181,7 +181,7 @@
             font-size: 12px;
             color: #888;
             text-align: center;
-            line-height: 1.6;
+            line-height: 1.2;
         }
         
         .signature span {
@@ -200,13 +200,13 @@
     </style>
 </head>
 <body>
-    <div class="fortune-teller-container">
-        <div class="fortune-teller" id="fortuneTeller">
+    <div class="ses-container">
+        <div class="ses" id="eunseok">
             <!-- Outer flaps -->
-            <div class="outer-flap" onclick="openFortuneTeller(0)"></div>
-            <div class="outer-flap" onclick="openFortuneTeller(1)"></div>
-            <div class="outer-flap" onclick="openFortuneTeller(2)"></div>
-            <div class="outer-flap" onclick="openFortuneTeller(3)"></div>
+            <div class="outer-flap" onclick="openMe(0)"></div>
+            <div class="outer-flap" onclick="openMe(1)"></div>
+            <div class="outer-flap" onclick="openMe(2)"></div>
+            <div class="outer-flap" onclick="openMe(3)"></div>
             
             <!-- Inner layer -->
             <div class="inner-layer" id="innerLayer">
@@ -219,10 +219,10 @@
     </div>
     
     <div class="message-box" id="messageBox">
-        <div>Click any colored flap to open, then choose a symbol</div>
+        <div>click any of the triangles, or click any of the symbols!</div>
     </div>
     
-    <button class="reset-btn" onclick="resetFortuneTeller()">Reset</button>
+    <button class="reset-btn" onclick="resetSes()">start over</button>
     
     <div class="page-break"></div>
     
@@ -242,29 +242,29 @@
             "Unexpected joy is coming your way"
         ];
         
-        function openFortuneTeller(flapNumber) {
-            const fortuneTeller = document.getElementById('fortuneTeller');
+        function openMe(flapNumber) {
+            const eunseok = document.getElementById('eunseok');
             const innerLayer = document.getElementById('innerLayer');
             
-            // Reset message box
-            document.getElementById('messageBox').innerHTML = '<div>Choose a symbol to reveal your message</div>';
+            // 
+            document.getElementById('messageBox').innerHTML = '<div>choose one of the hearts to reveal something?</div>';
             
-            // Open the fortune teller
+            // 
             switch(flapNumber) {
-                case 0: // Top-left
-                    fortuneTeller.style.transform = 'rotateZ(-10deg)';
+                case 0: // top-left
+                    eunseok.style.transform = 'rotateZ(-10deg)';
                     innerLayer.style.transform = 'rotateZ(45deg)';
                     break;
-                case 1: // Top-right
-                    fortuneTeller.style.transform = 'rotateZ(10deg)';
+                case 1: // top-right
+                    eunseok.style.transform = 'rotateZ(10deg)';
                     innerLayer.style.transform = 'rotateZ(-45deg)';
                     break;
-                case 2: // Bottom-left
-                    fortuneTeller.style.transform = 'rotateZ(10deg) rotateX(10deg)';
+                case 2: // bottom-left
+                    eunseok.style.transform = 'rotateZ(10deg) rotateX(10deg)';
                     innerLayer.style.transform = 'rotateZ(45deg)';
                     break;
-                case 3: // Bottom-right
-                    fortuneTeller.style.transform = 'rotateZ(-10deg) rotateX(10deg)';
+                case 3: // bottom-right
+                    eunseok.style.transform = 'rotateZ(-10deg) rotateX(10deg)';
                     innerLayer.style.transform = 'rotateZ(-45deg)';
                     break;
             }
@@ -277,14 +277,14 @@
             messageBox.innerHTML = `<div class="fade-in">${randomMessage}</div>`;
         }
         
-        function resetFortuneTeller() {
-            const fortuneTeller = document.getElementById('fortuneTeller');
+        function resetses() {
+            const eunseok = document.getElementById('eunseok');
             const innerLayer = document.getElementById('innerLayer');
             
-            fortuneTeller.style.transform = 'rotateZ(0deg)';
+            eunseok.style.transform = 'rotateZ(0deg)';
             innerLayer.style.transform = 'rotateZ(0deg)';
             
-            document.getElementById('messageBox').innerHTML = '<div>Click any colored flap to open, then choose a symbol</div>';
+            document.getElementById('messageBox').innerHTML = '<div>click any of the hearts!</div>';
         }
     </script>
 </body>
